@@ -33,10 +33,10 @@ module.exports = class Maze
     generateMaze x, y, board
       .then (result) ->
         board = result
-      maze  = ""
+      maze  = []
       for i in [0..height-1]
-        maze += board[i].join ''
-        maze += '\n'
+        maze.push board[i].join ''
+      maze = maze.join '\n'
 
       # return作成
       res =
