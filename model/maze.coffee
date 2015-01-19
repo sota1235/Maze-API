@@ -52,23 +52,31 @@ module.exports = class Maze
           continue
         if board[x][y-2] is '#'
           board[x][y-1] = board[x][y-2] = '.'
-          board = generateMaze x, y-2, board
+          setTimeOut () ->
+            board = generateMaze x, y-2, board
+          , 0
       else if d is 1
         if x+2 >= width
           continue
         if board[x+2][y] is '#'
           board[x+1][y] = board[x+2][y] = '.'
-          board = generateMaze x+2, y, board
+          setTimeOut () ->
+            board = generateMaze x+2, y, board
+          , 0
       else if d is 2
         if y+2 >= height
           continue
         if board[x][y+2] is '#'
           board[x][y+1] = board[x][y+2] = '.'
-          board = generateMaze x, y+2, board
+          setTimeOut () ->
+            board = generateMaze x, y+2, board
+          , 0
       else if d is 3
         if x-2 < 0
           continue
         if board[x-2][y] is '#'
           board[x-1][y] = board[x-2][y] = '.'
-          board = generateMaze x-2, y, board
+          setTimeOut () ->
+            board = generateMaze x-2, y, board
+          , 0
     return board
