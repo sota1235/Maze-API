@@ -12,6 +12,7 @@ Maze = require path.resolve 'model/maze.coffee'
 MazeMaker = new Maze
 
 # app set
+app.set 'port', process.env.PORT || 3000
 app.set 'view engine', 'jade'
 app.set 'views', path.resolve 'views'
 
@@ -27,4 +28,4 @@ app.get '/maze', (req, res) ->
   res.header 'X-Content-Type-Options', 'nosiff'
   res.send JSON.stringify m
 
-app.listen 3000
+app.listen app.get 'port'
