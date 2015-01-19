@@ -13,7 +13,8 @@
   "dependencies": {
     "express": "*",
     "coffee-script": "*",
-    "jade": "*"
+    "jade": "*",
+    "lodash": "*"
   },
   "author": "sota1235",
   "license": "MIT"
