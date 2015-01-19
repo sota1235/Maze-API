@@ -4,7 +4,8 @@
 ###
 
 module.exports = class Maze
-  _ = require 'lodash'
+  _         = require 'lodash'
+  {Promise} = require 'es6-promise'
 
   # Errorをreturn
   errorResponse: () ->
@@ -29,58 +30,61 @@ module.exports = class Maze
     # 穴掘り
     x = 1
     y = 1
-    board = generateMaze x, y, board
-    maze  = ""
-    for i in [0..width]
-      maze += board[i].join ''
-      maze += '\n'
+    generateMaze x, y, board
+      .then (result) ->
+        board = result
+      maze  = ""
+      for i in [0..width]
+        maze += board[i].join ''
+        maze += '\n'
 
-    # return作成
-    res =
-      'result': 'OK'
-      'data':
-        'width' : String width
-        'height': String height
-        'maze'  : maze
-    return res
+      # return作成
+      res =
+        'result': 'OK'
+        'data':
+          'width' : String width
+          'height': String height
+          'maze'  : maze
+      return res
 
   # 穴掘り
   generateMaze = (x, y, board) ->
-    dir = _.shuffle([0, 1, 2, 3])
-    height = board.length
-    width  = board[0].length
-    for d in dir
-      if d is 0
-        # 画面外処理
-        if y-2 < 0
-          continue
-        if board[x][y-2] is '#'
-          board[x][y-1] = board[x][y-2] = '.'
-          setTimeout () ->
-            board = generateMaze x, y-2, board
-          , 0
-      else if d is 1
-        if x+2 >= width
-          continue
-        if board[x+2][y] is '#'
-          board[x+1][y] = board[x+2][y] = '.'
-          setTimeout () ->
-            board = generateMaze x+2, y, board
-          , 0
-      else if d is 2
-        if y+2 >= height
-          continue
-        if board[x][y+2] is '#'
-          board[x][y+1] = board[x][y+2] = '.'
-          setTimeout () ->
-            board = generateMaze x, y+2, board
-          , 0
-      else if d is 3
-        if x-2 < 0
-          continue
-        if board[x-2][y] is '#'
-          board[x-1][y] = board[x-2][y] = '.'
-          setTimeout () ->
-            board = generateMaze x-2, y, board
-          , 0
-    return board
+    return new Promise (resolve, reject) ->
+      dir = _.shuffle([0, 1, 2, 3])
+      height = board.length
+      width  = board[0].length
+      for d in dir
+        if d is 0
+          # 画面外処理
+          if y-2 < 0
+            continue
+          if board[x][y-2] is '#'
+            board[x][y-1] = board[x][y-2] = '.'
+            generateMaze x, y-2, board
+              .then (result) ->
+                board = result
+        else if d is 1
+          if x+2 >= width
+            continue
+          if board[x+2][y] is '#'
+            board[x+1][y] = board[x+2][y] = '.'
+            generateMaze x+2, y, board
+              .then (result) ->
+                board = result
+        else if d is 2
+          if y+2 >= height
+            continue
+          if board[x][y+2] is '#'
+            board[x][y+1] = board[x][y+2] = '.'
+            generateMaze x, y+2, board
+              .then (result) ->
+                board = result
+        else if d is 3
+          if x-2 < 0
+            continue
+          if board[x-2][y] is '#'
+            board[x-1][y] = board[x-2][y] = '.'
+            generateMaze x-2, y, board
+              .then (result) ->
+                board = result
+      resolve(board)
