@@ -58,32 +58,32 @@ module.exports = class Maze
           # 画面外処理
           if y-2 < 0
             continue
-          if board[x][y-2] is '#'
-            board[x][y-1] = board[x][y-2] = '.'
+          if board[y-2][x] is '#'
+            board[y-1][x] = board[y-2][x] = '.'
             generateMaze x, y-2, board
               .then (result) ->
                 board = result
         else if d is 1
           if x+2 >= width
             continue
-          if board[x+2][y] is '#'
-            board[x+1][y] = board[x+2][y] = '.'
+          if board[y][x+2] is '#'
+            board[y][x+1] = board[y][x+2] = '.'
             generateMaze x+2, y, board
               .then (result) ->
                 board = result
         else if d is 2
           if y+2 >= height
             continue
-          if board[x][y+2] is '#'
-            board[x][y+1] = board[x][y+2] = '.'
+          if board[y+2][x] is '#'
+            board[y+1][x] = board[y+2][x] = '.'
             generateMaze x, y+2, board
               .then (result) ->
                 board = result
         else if d is 3
           if x-2 < 0
             continue
-          if board[x-2][y] is '#'
-            board[x-1][y] = board[x-2][y] = '.'
+          if board[y][x-2] is '#'
+            board[y][x-1] = board[y][x-2] = '.'
             generateMaze x-2, y, board
               .then (result) ->
                 board = result
