@@ -22,11 +22,14 @@ app.get '/', (req, res) ->
 app.get '/maze', (req, res) ->
   width  = req.query.width
   height = req.query.height
-  m = MazeMaker.generateJson width, height
+  if width == undefined or height == undefined
+    json = MazeMaker.errorResponse()
+  else
+    json = MazeMaker.generateJson width, height
   res.contentType 'application/json'
   res.header 'Access-Control-Allow-Origin', '*'
   res.header 'X-Content-Type-Options', 'nosiff'
-  res.send JSON.stringify m
+  res.send JSON.stringify json
 
 app.use (req, res, next) ->
   res.status 404
