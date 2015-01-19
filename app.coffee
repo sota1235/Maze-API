@@ -5,9 +5,14 @@
 ###
 
 express = require 'express'
+path    = require 'path'
 app     = express()
 
+# app set
+app.set 'view engine', 'jade'
+app.set 'views', path.resolve 'views'
+
 app.get '/', (req, res) ->
-  res.send 'Hello, World'
+  res.render 'index', { title: 'Mazi API' }
 
 app.listen 3000

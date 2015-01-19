@@ -12,7 +12,8 @@
   ],
   "dependencies": {
     "express": "*",
-    "coffee-script": "*"
+    "coffee-script": "*",
+    "jade": "*"
   },
   "author": "sota1235",
   "license": "MIT"
