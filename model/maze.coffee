@@ -6,12 +6,16 @@
 module.exports = class Maze
   _ = require 'lodash'
 
+  # Errorをreturn
+  errorResponse: () ->
+    res =
+      'result': 'NG'
+    return res
+
   # 迷路データのjsonをreturn
   generateJson: (width, height) ->
     if not (20 <= width <= 200 or 20 <= width <= 200)
-      res =
-        'result': 'NG'
-      return res
+      return @errorResponse()
     # 迷路
     board = []
     # 壁で埋める
