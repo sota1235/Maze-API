@@ -20,9 +20,9 @@ module.exports = class Maze
     # 迷路
     board = []
     # 壁で埋める
-    for i in [0..height]
+    for i in [0..height-1]
       line = []
-      for j in [0..width]
+      for j in [0..width-1]
         line.push '#'
       board.push line
     # スタート地点とゴール地点を空ける
@@ -34,7 +34,7 @@ module.exports = class Maze
       .then (result) ->
         board = result
       maze  = ""
-      for i in [0..height]
+      for i in [0..height-1]
         maze += board[i].join ''
         maze += '\n'
 
