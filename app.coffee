@@ -28,4 +28,8 @@ app.get '/maze', (req, res) ->
   res.header 'X-Content-Type-Options', 'nosiff'
   res.send JSON.stringify m
 
+app.use (req, res, next) ->
+  res.status 404
+  res.send 'Page Not Found'
+
 app.listen app.get 'port'
