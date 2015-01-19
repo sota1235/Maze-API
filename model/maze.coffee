@@ -34,7 +34,7 @@ module.exports = class Maze
       .then (result) ->
         board = result
       maze  = ""
-      for i in [0..width]
+      for i in [0..height]
         maze += board[i].join ''
         maze += '\n'
 
