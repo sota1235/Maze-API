@@ -1,0 +1,19 @@
+{
+  "name": "mazeapi",
+  "version": "0.0.1",
+  "description": "API of making maze",
+  "main": "app.coffee",
+  "scripts": {
+    "start": "coffee app.coffee",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "maze"
+  ],
+  "dependencies": {
+    "express": "*",
+    "coffee-script": "*"
+  },
+  "author": "sota1235",
+  "license": "MIT"
+}
