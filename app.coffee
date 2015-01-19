@@ -24,7 +24,7 @@ app.get '/maze', (req, res) ->
   height = req.query.height
   m = MazeMaker.generateJson width, height
   res.contentType 'application/json'
-  res.header 'Access-Control-Allow-Origin', '/'
+  res.header 'Access-Control-Allow-Origin', '*'
   res.header 'X-Content-Type-Options', 'nosiff'
   res.send JSON.stringify m
 
